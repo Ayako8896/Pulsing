@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pulse Relay Control</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #000000;
+      color: #aaddff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      text-align: center;
+      padding: 20px;
+      border: 2px solid #aaddff;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #3399ff;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 1.5em;
+      background-color: #111111;
+      color: #aaddff;
+      border: 2px solid #aaddff;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    button:hover {
+      background-color: #222222;
+      transform: scale(1.05);
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Pulse Relay</h1>
+    <button onclick="pulseRelay()">Pulse Relay</button>
+  </div>
+
+  <script>
+    function pulseRelay() {
+      const apiKey = "Y9UZSEKQI52AY8TO"; // Replace with your ThingSpeak Write API Key
+      const url = `https://api.thingspeak.com/update?api_key=${apiKey}&field1=1`;
+
+      fetch(url)
+        .then(response => {
+          if (response.ok) {
+            alert("Relay pulse command sent.");
+          } else {
+            alert("Failed to send pulse command.");
+          }
+        })
+        .catch(error => {
+          console.error("Error:", error);
+          alert("Error sending pulse.");
+        });
+    }
+  </script>
+</body>
+</html>
